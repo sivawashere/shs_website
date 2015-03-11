@@ -1,3 +1,5 @@
 asistencia/
 horas/
 cositas/
+*.pyc
+.DS_Store
