@@ -14,9 +14,9 @@ class ReceiveAnuncio(InboundMailHandler):
 	def receive(self, msg):
 		anuncio = Anuncio(parent=anuncio_key())
 		anuncio.title = msg.subject
-		content, texts = "", msg.bodies(content_type='text/html')
+		content, texts = "", msg.bodies(content_type='text/plain')
 		for _, text in texts:
-			content += text.decode()
+			content += text.decode() + ' '
 		anuncio.content = content
 		anuncio.put()
 
