@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Información sobre {{ nombre }}{% endblock %}
+{% block content %}
+<ul class="nav nav-tabs" role="tablist">
+	<li class="active"><a href="#ausencias" role="tab" data-toggle="tab">Ausencias</a></li>
+	<li><a href="#horas" role="tab" data-toggle="tab">Horas de Servicio</a></li>
+	<li><a href="#cositas" role="tab" data-toggle="tab">Cositas</a></li>
+</ul>
+<div class="tab-content">
+	<div class="tab-pane fade active in" id="ausencias">
+		<br />
+		{% if ausencias|length >= 3 %}
+		<div class="alert alert-danger" role="alert">
+		{% else %}
+		<div class="alert alert-success" role="alert">
+		{% endif %}
+			Tiene {{ausencias|length}} ausencias.
+		</div>
+		{% if ausencias|length > 0 %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Fecha</th>
+					<th>Excusa</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for fecha, excusa in ausencias %}
+					<tr>
+						<td>{{ fecha }}</td>
+						<td>{{ excusa }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+	</div>
+	<div class="tab-pane fade" id="horas">
+		<br />
+		{% if horas|length >= 10 %}
+		<div class="alert alert-success" role="alert">
+		{% else %}
+		<div class="alert alert-info" role="alert">
+		{% endif %}
+			Tiene {{horas_total}} horas y {{minutos}} minutos de servicio.
+		</div>
+		{% if horas|length > 0 %}
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Actividad</th>
+					<th>Horas (minutos)</th>
+					<th>Más información</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for actividad, minutos, metadata in horas %}
+					<tr>
+						<td>{{ actividad }}</td>
+						<td>{{ minutos }}</td>
+						<td>{{ metadata }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% endif %}
+	</div>
+	<div class="tab-pane fade" id="cositas">
+		<br />
+		{% if cositas|length >= 3 %}
+		<div class="alert alert-success" role="alert">
+		{% else %}
+		<div class="alert alert-info" role="alert">
+		{% endif %}
+			Tiene {{cositas|length}} cositas.
+		</div>
+		{% if cositas|length > 0 %}
+		<ul>
+			{% for cosita in cositas %}
+				<li>{{ cosita }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
