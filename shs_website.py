@@ -49,6 +49,7 @@ class SocioPage(webapp2.RequestHandler):
 		if not cositas:
 			cositas = []
 		minutos = 0
+		aus = [[fecha, ''.join(['' if ord(c) < 32 or ord(c) > 126 else c for c in s])] for fecha, s in aus]
 		horas = [[''.join(['' if ord(c) < 32 or ord(c) > 126 else c for c in s]) for s in l] for l in horas]
 		cositas = [''.join(['' if ord(c) < 32 or ord(c) > 126 else c for c in s]) for l in cositas for s in l]
 		for _, hora, _, in horas:
